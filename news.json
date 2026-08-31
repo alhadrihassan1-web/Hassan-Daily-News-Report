@@ -1,0 +1,26 @@
+[
+  {
+    "id": "news-001",
+    "title": "خبر تجريبي عالمي",
+    "summary": "هذا مثال على ملخص الخبر.",
+    "category": "World",
+    "category_ar": "العالم",
+    "source": "Reuters",
+    "date": "31 أغسطس 2026 • 9:30 PM",
+    "image": "https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?auto=format&fit=crop&w=900&q=80",
+    "url": "https://www.reuters.com/world/",
+    "breaking": true
+  },
+  {
+    "id": "news-002",
+    "title": "خبر تجريبي عن الألعاب",
+    "summary": "هنا تظهر أخبار Battlefield وCall of Duty.",
+    "category": "Gaming",
+    "category_ar": "ألعاب",
+    "source": "EA",
+    "date": "31 أغسطس 2026 • 8:45 PM",
+    "image": "https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=900&q=80",
+    "url": "https://www.ea.com/",
+    "breaking": false
+  }
+]
