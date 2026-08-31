@@ -6,9 +6,7 @@
   <title>Hassan Daily</title>
 
   <style>
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     body {
       margin: 0;
@@ -24,8 +22,8 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      gap: 15px;
       flex-wrap: wrap;
+      gap: 12px;
     }
 
     .brand {
@@ -43,7 +41,7 @@
       text-decoration: none;
       padding: 9px 15px;
       border-radius: 9px;
-      background: rgba(255,255,255,0.08);
+      background: rgba(255,255,255,.08);
     }
 
     .nav a.active {
@@ -65,7 +63,6 @@
 
     .hero h1 {
       margin: 0 0 8px;
-      font-size: 34px;
     }
 
     .hero p {
@@ -80,7 +77,6 @@
       display: flex;
       gap: 10px;
       flex-wrap: wrap;
-      align-items: center;
     }
 
     .controls button {
@@ -91,7 +87,6 @@
       cursor: pointer;
     }
 
-    .controls button:hover,
     .controls button.active {
       background: #111827;
       color: white;
@@ -111,15 +106,10 @@
       border-radius: 16px;
       overflow: hidden;
       box-shadow: 0 3px 12px rgba(0,0,0,.06);
-      transition: 0.2s;
-    }
-
-    .news-card:hover {
-      transform: translateY(-2px);
     }
 
     .news-card.read {
-      opacity: 0.5;
+      opacity: .5;
       background: #eceff3;
     }
 
@@ -136,8 +126,8 @@
 
     .meta {
       display: flex;
-      flex-wrap: wrap;
       gap: 8px;
+      flex-wrap: wrap;
       margin-bottom: 12px;
     }
 
@@ -154,7 +144,6 @@
 
     .source {
       background: #e5e7eb;
-      color: #111827;
     }
 
     .breaking {
@@ -163,26 +152,23 @@
       font-weight: bold;
     }
 
-    .news-content h2 {
+    h2 {
       margin: 0 0 12px;
-      font-size: 24px;
-      line-height: 1.4;
     }
 
-    .news-content p {
-      color: #4b5563;
+    p {
       line-height: 1.8;
-      margin-bottom: 18px;
     }
 
     .bottom {
       display: flex;
       justify-content: space-between;
       gap: 15px;
-      align-items: center;
       flex-wrap: wrap;
-      font-size: 13px;
+      align-items: center;
       color: #6b7280;
+      font-size: 13px;
+      margin-top: 18px;
     }
 
     .read-link {
@@ -194,21 +180,6 @@
       font-weight: bold;
     }
 
-    .read-link:hover {
-      background: #374151;
-    }
-
-    .read-label {
-      display: none;
-      color: #166534;
-      font-weight: bold;
-      margin-right: 8px;
-    }
-
-    .news-card.read .read-label {
-      display: inline;
-    }
-
     @media (max-width: 750px) {
       .news-card {
         grid-template-columns: 1fr;
@@ -216,10 +187,6 @@
 
       .news-image {
         height: 210px;
-      }
-
-      .hero h1 {
-        font-size: 28px;
       }
     }
   </style>
@@ -250,185 +217,123 @@
   <button onclick="filterNews('Gaming', this)">ألعاب</button>
   <button onclick="filterNews('Sports', this)">رياضة</button>
   <button onclick="filterNews('Tech', this)">تقنية</button>
-  <button onclick="showUnread(this)">غير المقروء فقط</button>
+  <button onclick="toggleUnread(this)">غير المقروء فقط</button>
 </div>
 
-<main>
-
-  <article class="news-card" data-category="World" data-id="news1">
-    <div
-      class="news-image"
-      style="background-image:url('https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?auto=format&fit=crop&w=900&q=80');">
-    </div>
-
-    <div class="news-content">
-      <div class="meta">
-        <span class="badge category">العالم</span>
-        <span class="badge source">Reuters</span>
-        <span class="badge breaking">عاجل</span>
-      </div>
-
-      <h2>خبر تجريبي عالمي</h2>
-
-      <p>
-        هذا مكان ملخص الخبر. لاحقًا سنضع هنا الأخبار الحقيقية اليومية
-        مع المصدر والرابط والتاريخ والتصنيف.
-      </p>
-
-      <div class="bottom">
-        <div>
-          31 أغسطس 2026 • 9:30 PM
-          <span class="read-label">✓ مقروء</span>
-        </div>
-
-        <a
-          class="read-link"
-          href="https://www.reuters.com/world/"
-          target="_blank"
-          onclick="markRead('news1')">
-          فتح المصدر
-        </a>
-      </div>
-    </div>
-  </article>
-
-
-  <article class="news-card" data-category="Gaming" data-id="news2">
-    <div
-      class="news-image"
-      style="background-image:url('https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=900&q=80');">
-    </div>
-
-    <div class="news-content">
-      <div class="meta">
-        <span class="badge category">ألعاب</span>
-        <span class="badge source">EA</span>
-      </div>
-
-      <h2>خبر تجريبي عن الألعاب</h2>
-
-      <p>
-        هنا ستظهر أخبار Battlefield وCall of Duty
-        وأهم تحديثات الألعاب التي تهمك.
-      </p>
-
-      <div class="bottom">
-        <div>
-          31 أغسطس 2026 • 8:45 PM
-          <span class="read-label">✓ مقروء</span>
-        </div>
-
-        <a
-          class="read-link"
-          href="https://www.ea.com/"
-          target="_blank"
-          onclick="markRead('news2')">
-          فتح المصدر
-        </a>
-      </div>
-    </div>
-  </article>
-
-
-  <article class="news-card" data-category="Saudi" data-id="news3">
-    <div
-      class="news-image"
-      style="background-image:url('https://images.unsplash.com/photo-1539650116574-75c0c6d73f6e?auto=format&fit=crop&w=900&q=80');">
-    </div>
-
-    <div class="news-content">
-      <div class="meta">
-        <span class="badge category">السعودية</span>
-        <span class="badge source">مصدر محلي</span>
-      </div>
-
-      <h2>خبر تجريبي محلي</h2>
-
-      <p>
-        هنا ستظهر أخبار السعودية وجازان وعسير
-        والأحداث المحلية المهمة.
-      </p>
-
-      <div class="bottom">
-        <div>
-          31 أغسطس 2026 • 7:50 PM
-          <span class="read-label">✓ مقروء</span>
-        </div>
-
-        <a
-          class="read-link"
-          href="#"
-          onclick="markRead('news3')">
-          فتح المصدر
-        </a>
-      </div>
-    </div>
-  </article>
-
+<main id="news-container">
+  جاري تحميل الأخبار...
 </main>
 
 <script>
+let allNews = [];
 let currentCategory = "all";
 let unreadOnly = false;
 
-function markRead(id) {
-  localStorage.setItem(id, "read");
+fetch("news.json")
+  .then(response => response.json())
+  .then(data => {
+    allNews = data;
+    renderNews();
+  })
+  .catch(error => {
+    document.getElementById("news-container").innerHTML =
+      "<p>تعذر تحميل الأخبار.</p>";
+  });
 
-  const card = document.querySelector('[data-id="' + id + '"]');
+function renderNews() {
+  const container = document.getElementById("news-container");
 
-  if (card) {
-    card.classList.add("read");
+  const filtered = allNews.filter(news => {
+    const categoryMatch =
+      currentCategory === "all" ||
+      news.category === currentCategory;
+
+    const isRead =
+      localStorage.getItem(news.id) === "read";
+
+    const unreadMatch =
+      !unreadOnly || !isRead;
+
+    return categoryMatch && unreadMatch;
+  });
+
+  if (filtered.length === 0) {
+    container.innerHTML = "<p>لا توجد أخبار في هذا التصنيف.</p>";
+    return;
   }
+
+  container.innerHTML = filtered.map(news => {
+    const isRead =
+      localStorage.getItem(news.id) === "read";
+
+    return `
+      <article class="news-card ${isRead ? "read" : ""}">
+        <div
+          class="news-image"
+          style="background-image:url('${news.image}')">
+        </div>
+
+        <div class="news-content">
+          <div class="meta">
+            <span class="badge category">
+              ${news.category_ar}
+            </span>
+
+            <span class="badge source">
+              ${news.source}
+            </span>
+
+            ${
+              news.breaking
+              ? '<span class="badge breaking">عاجل</span>'
+              : ''
+            }
+          </div>
+
+          <h2>${news.title}</h2>
+
+          <p>${news.summary}</p>
+
+          <div class="bottom">
+            <span>${news.date}</span>
+
+            <a
+              class="read-link"
+              href="${news.url}"
+              target="_blank"
+              onclick="markRead('${news.id}')">
+              فتح المصدر
+            </a>
+          </div>
+        </div>
+      </article>
+    `;
+  }).join("");
 }
 
-function loadReadNews() {
-  document.querySelectorAll(".news-card").forEach(card => {
-    const id = card.dataset.id;
-
-    if (localStorage.getItem(id) === "read") {
-      card.classList.add("read");
-    }
-  });
+function markRead(id) {
+  localStorage.setItem(id, "read");
 }
 
 function filterNews(category, button) {
   currentCategory = category;
 
-  document.querySelectorAll(".controls button").forEach(btn => {
-    if (btn.textContent !== "غير المقروء فقط") {
-      btn.classList.remove("active");
-    }
-  });
+  document.querySelectorAll(".controls button")
+    .forEach(btn => {
+      if (btn.textContent !== "غير المقروء فقط") {
+        btn.classList.remove("active");
+      }
+    });
 
   button.classList.add("active");
-  applyFilters();
+  renderNews();
 }
 
-function showUnread(button) {
+function toggleUnread(button) {
   unreadOnly = !unreadOnly;
   button.classList.toggle("active");
-  applyFilters();
+  renderNews();
 }
-
-function applyFilters() {
-  document.querySelectorAll(".news-card").forEach(card => {
-    const matchesCategory =
-      currentCategory === "all" ||
-      card.dataset.category === currentCategory;
-
-    const matchesUnread =
-      !unreadOnly ||
-      !card.classList.contains("read");
-
-    if (matchesCategory && matchesUnread) {
-      card.style.display = "";
-    } else {
-      card.style.display = "none";
-    }
-  });
-}
-
-loadReadNews();
 </script>
 
 </body>
