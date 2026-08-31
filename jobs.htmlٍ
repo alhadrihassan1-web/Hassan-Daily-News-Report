@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hassan Daily Jobs</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f5f6f8;
+      color: #1b1b1b;
+    }
+
+    .top-nav {
+      background: #0f172a;
+      color: white;
+      padding: 12px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .brand {
+      font-weight: bold;
+      font-size: 18px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 10px;
+    }
+
+    .nav-links a {
+      color: white;
+      text-decoration: none;
+      padding: 8px 14px;
+      border-radius: 8px;
+      background: rgba(255,255,255,0.08);
+    }
+
+    .nav-links a.active {
+      background: white;
+      color: #111827;
+      font-weight: bold;
+    }
+
+    header {
+      background: #111827;
+      color: white;
+      padding: 30px 20px;
+    }
+
+    header h1 {
+      margin: 0 0 8px;
+    }
+
+    header p {
+      margin: 0;
+      color: #cbd5e1;
+    }
+
+    .filters {
+      max-width: 950px;
+      margin: 20px auto;
+      padding: 0 15px;
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .filters button {
+      background: white;
+      border: 1px solid #ddd;
+      padding: 10px 15px;
+      border-radius: 20px;
+      cursor: pointer;
+    }
+
+    .filters button:hover {
+      background: #111827;
+      color: white;
+    }
+
+    main {
+      max-width: 950px;
+      margin: auto;
+      padding: 0 15px 40px;
+    }
+
+    .job-card {
+      background: white;
+      border-radius: 14px;
+      padding: 20px;
+      margin-bottom: 15px;
+      box-shadow: 0 2px 8px rgba(0,0,0,.06);
+    }
+
+    .job-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .job-card h2 {
+      margin: 0 0 10px;
+      font-size: 21px;
+    }
+
+    .company {
+      font-weight: bold;
+      color: #444;
+    }
+
+    .details {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin: 14px 0;
+    }
+
+    .tag {
+      background: #e5e7eb;
+      padding: 6px 10px;
+      border-radius: 8px;
+      font-size: 13px;
+    }
+
+    .status {
+      background: #dcfce7;
+      color: #166534;
+      padding: 6px 10px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: bold;
+    }
+
+    .job-card p {
+      color: #555;
+      line-height: 1.6;
+    }
+
+    .bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 15px;
+      font-size: 13px;
+      color: #777;
+    }
+
+    .apply-link {
+      text-decoration: none;
+      background: #111827;
+      color: white;
+      padding: 9px 14px;
+      border-radius: 8px;
+      font-weight: bold;
+    }
+
+    @media (max-width: 650px) {
+      .job-top {
+        display: block;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="top-nav">
+  <div class="brand">Hassan Daily</div>
+
+  <div class="nav-links">
+    <a href="index.html">الأخبار</a>
+    <a href="jobs.html" class="active">الوظائف</a>
+  </div>
+</div>
+
+<header>
+  <h1>الوظائف</h1>
+  <p>الفرص الوظيفية المناسبة والمحدثة</p>
+</header>
+
+<div class="filters">
+  <button onclick="filterJobs('all')">الكل</button>
+  <button onclick="filterJobs('Jazan')">جازان</button>
+  <button onclick="filterJobs('Asir')">عسير</button>
+  <button onclick="filterJobs('Riyadh')">الرياض</button>
+  <button onclick="filterJobs('Jeddah')">جدة</button>
+</div>
+
+<main>
+
+  <article class="job-card" data-city="Jazan">
+    <div class="job-top">
+      <div>
+        <h2>Administrative Coordinator</h2>
+        <div class="company">شركة تجريبية</div>
+      </div>
+
+      <span class="status">متاحة</span>
+    </div>
+
+    <div class="details">
+      <span class="tag">📍 جازان</span>
+      <span class="tag">إداري</span>
+      <span class="tag">دوام كامل</span>
+    </div>
+
+    <p>
+      هذه وظيفة تجريبية. لاحقًا سنضع هنا الوظائف الحقيقية المناسبة لك
+      مع رابط التقديم الرسمي.
+    </p>
+
+    <div class="bottom">
+      <span>نُشرت: 31 أغسطس 2026</span>
+
+      <a class="apply-link" href="#" target="_blank">
+        التقديم
+      </a>
+    </div>
+  </article>
+
+
+  <article class="job-card" data-city="Riyadh">
+    <div class="job-top">
+      <div>
+        <h2>Operations Coordinator</h2>
+        <div class="company">شركة عالمية تجريبية</div>
+      </div>
+
+      <span class="status">متاحة</span>
+    </div>
+
+    <div class="details">
+      <span class="tag">📍 الرياض</span>
+      <span class="tag">Operations</span>
+      <span class="tag">دوام كامل</span>
+    </div>
+
+    <p>
+      هنا سنعرض الوظائف المناسبة في الشركات الكبيرة
+      وروابط التقديم المباشر.
+    </p>
+
+    <div class="bottom">
+      <span>نُشرت: 31 أغسطس 2026</span>
+
+      <a class="apply-link" href="#" target="_blank">
+        التقديم
+      </a>
+    </div>
+  </article>
+
+</main>
+
+<script>
+function filterJobs(city) {
+  document.querySelectorAll(".job-card").forEach(card => {
+
+    if (
+      city === "all" ||
+      card.dataset.city === city
+    ) {
+      card.style.display = "";
+    } else {
+      card.style.display = "none";
+    }
+
+  });
+}
+</script>
+
+</body>
+</html>
