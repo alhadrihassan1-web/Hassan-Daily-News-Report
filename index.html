@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hassan Daily News</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f5f6f8;
+      color: #1b1b1b;
+    }
+
+    header {
+      background: #111827;
+      color: white;
+      padding: 28px 20px;
+    }
+
+    header h1 {
+      margin: 0 0 8px;
+    }
+
+    header p {
+      margin: 0;
+      color: #cbd5e1;
+    }
+
+    .filters {
+      max-width: 950px;
+      margin: 20px auto;
+      padding: 0 15px;
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .filters button {
+      border: none;
+      background: white;
+      padding: 10px 15px;
+      border-radius: 20px;
+      cursor: pointer;
+      border: 1px solid #ddd;
+    }
+
+    .filters button:hover {
+      background: #111827;
+      color: white;
+    }
+
+    main {
+      max-width: 950px;
+      margin: auto;
+      padding: 0 15px 40px;
+    }
+
+    .news-card {
+      background: white;
+      border-radius: 14px;
+      margin-bottom: 15px;
+      overflow: hidden;
+      display: flex;
+      min-height: 180px;
+      box-shadow: 0 2px 8px rgba(0,0,0,.06);
+      transition: 0.2s;
+    }
+
+    .news-card:hover {
+      transform: translateY(-2px);
+    }
+
+    .news-card.read {
+      opacity: 0.48;
+      background: #eeeeee;
+    }
+
+    .news-image {
+      width: 260px;
+      background: #d8dde5;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 48px;
+    }
+
+    .news-content {
+      padding: 18px;
+      flex: 1;
+    }
+
+    .meta {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 10px;
+      font-size: 13px;
+    }
+
+    .category {
+      background: #111827;
+      color: white;
+      padding: 5px 9px;
+      border-radius: 8px;
+    }
+
+    .source {
+      background: #e5e7eb;
+      padding: 5px 9px;
+      border-radius: 8px;
+    }
+
+    .news-content h2 {
+      margin: 0 0 10px;
+      font-size: 21px;
+    }
+
+    .news-content p {
+      color: #555;
+      line-height: 1.6;
+    }
+
+    .bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 15px;
+      font-size: 13px;
+      color: #777;
+    }
+
+    .read-link {
+      color: #2563eb;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    @media (max-width: 650px) {
+      .news-card {
+        display: block;
+      }
+
+      .news-image {
+        width: 100%;
+        height: 160px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>Hassan Daily News</h1>
+  <p>أهم الأخبار اليومية في مكان واحد</p>
+</header>
+
+<div class="filters">
+  <button onclick="filterNews('all')">الكل</button>
+  <button onclick="filterNews('Saudi')">السعودية</button>
+  <button onclick="filterNews('World')">العالم</button>
+  <button onclick="filterNews('Gaming')">ألعاب</button>
+  <button onclick="filterNews('Sports')">رياضة</button>
+  <button onclick="filterNews('Tech')">تقنية</button>
+</div>
+
+<main>
+
+  <article class="news-card" data-category="World" data-id="news1">
+    <div class="news-image">🌍</div>
+
+    <div class="news-content">
+      <div class="meta">
+        <span class="category">العالم</span>
+        <span class="source">Reuters</span>
+      </div>
+
+      <h2>خبر تجريبي عالمي</h2>
+
+      <p>
+        هنا سيكون ملخص الخبر بشكل قصير وواضح.
+        لاحقاً سنضع الأخبار الحقيقية والتحديثات اليومية.
+      </p>
+
+      <div class="bottom">
+        <span>31 أغسطس 2026 • 9:30 PM</span>
+
+        <a class="read-link"
+           href="https://www.reuters.com/world/"
+           target="_blank"
+           onclick="markRead('news1')">
+          اقرأ الخبر ↗
+        </a>
+      </div>
+    </div>
+  </article>
+
+
+  <article class="news-card" data-category="Gaming" data-id="news2">
+    <div class="news-image">🎮</div>
+
+    <div class="news-content">
+      <div class="meta">
+        <span class="category">ألعاب</span>
+        <span class="source">EA</span>
+      </div>
+
+      <h2>خبر تجريبي عن الألعاب</h2>
+
+      <p>
+        هنا تظهر أخبار Battlefield وCall of Duty
+        والألعاب التي تتابعها.
+      </p>
+
+      <div class="bottom">
+        <span>31 أغسطس 2026 • 8:45 PM</span>
+
+        <a class="read-link"
+           href="https://www.ea.com/"
+           target="_blank"
+           onclick="markRead('news2')">
+          اقرأ الخبر ↗
+        </a>
+      </div>
+    </div>
+  </article>
+
+
+  <article class="news-card" data-category="Saudi" data-id="news3">
+    <div class="news-image">🇸🇦</div>
+
+    <div class="news-content">
+      <div class="meta">
+        <span class="category">السعودية</span>
+        <span class="source">مصدر الخبر</span>
+      </div>
+
+      <h2>خبر تجريبي محلي</h2>
+
+      <p>
+        هنا سنضع أخبار السعودية وجازان وعسير
+        والأخبار المحلية المهمة.
+      </p>
+
+      <div class="bottom">
+        <span>31 أغسطس 2026 • 7:50 PM</span>
+
+        <a class="read-link"
+           href="#"
+           onclick="markRead('news3')">
+          اقرأ الخبر
+        </a>
+      </div>
+    </div>
+  </article>
+
+</main>
+
+<script>
+
+function markRead(id) {
+  localStorage.setItem(id, "read");
+
+  const card = document.querySelector(
+    '[data-id="' + id + '"]'
+  );
+
+  card.classList.add("read");
+}
+
+function loadReadNews() {
+
+  document.querySelectorAll(".news-card").forEach(card => {
+
+    const id = card.dataset.id;
+
+    if (localStorage.getItem(id) === "read") {
+      card.classList.add("read");
+    }
+
+  });
+
+}
+
+function filterNews(category) {
+
+  document.querySelectorAll(".news-card").forEach(card => {
+
+    if (
+      category === "all" ||
+      card.dataset.category === category
+    ) {
+      card.style.display = "";
+    } else {
+      card.style.display = "none";
+    }
+
+  });
+
+}
+
+loadReadNews();
+
+</script>
+
+</body>
+</html>
