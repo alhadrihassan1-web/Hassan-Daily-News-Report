@@ -12,9 +12,6 @@ jobs:
   update:
     runs-on: ubuntu-latest
 
-    env:
-      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-
     steps:
       - name: Get website files
         uses: actions/checkout@v4
@@ -23,6 +20,9 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: "3.12"
+
+      - name: Install free translator
+        run: pip install argostranslate
 
       - name: Update news
         run: python update_site.py
