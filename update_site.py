@@ -1,7 +1,10 @@
 import json
+import os
 import urllib.request
 import xml.etree.ElementTree as ET
 from datetime import datetime
+
+OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY")
 
 SOURCES = [
     {
@@ -36,6 +39,70 @@ SOURCES = [
     }
 ]
 
+def improve_with_ai(title, source_name):
+    if not OPENAI_API_KEY:
+        return title, "اضغط فتح المصدر لقراءة تفاصيل الخبر."
+
+    prompt = f"""
+حوّل الخبر التالي إلى صيغة عربية مناسبة لموقع أخبار شخصي.
+
+العنوان الأصلي:
+{title}
+
+المصدر:
+{source_name}
+
+أرجع JSON فقط بهذا الشكل:
+{{
+  "title": "عنوان عربي واضح ومختصر",
+  "summary": "ملخص عربي من سطر إلى سطرين فقط"
+}}
+
+لا تضف معلومات غير موجودة في العنوان.
+"""
+
+    payload = {
+        "model": "gpt-5.6-luna",
+        "input": prompt
+    }
+
+    request = urllib.request.Request(
+        "https://api.openai.com/v1/responses",
+        data=json.dumps(payload).encode("utf-8"),
+        headers={
+            "Authorization": f"Bearer {OPENAI_API_KEY}",
+            "Content-Type": "application/json"
+        },
+        method="POST"
+    )
+
+    try:
+        with urllib.request.urlopen(request, timeout=40) as response:
+            result = json.loads(response.read().decode("utf-8"))
+
+        text = ""
+
+        for output in result.get("output", []):
+            for content in output.get("content", []):
+                if content.get("type") == "output_text":
+                    text += content.get("text", "")
+
+        text = text.strip()
+
+        if text.startswith("```"):
+            text = text.replace("```json", "").replace("```", "").strip()
+
+        ai_data = json.loads(text)
+
+        return (
+            ai_data.get("title", title),
+            ai_data.get("summary", "اضغط فتح المصدر لقراءة التفاصيل.")
+        )
+
+    except Exception as error:
+        print("AI error:", error)
+        return title, "اضغط فتح المصدر لقراءة تفاصيل الخبر."
+
 
 def read_feed(source):
     request = urllib.request.Request(
@@ -47,27 +114,35 @@ def read_feed(source):
         xml_data = response.read()
 
     root = ET.fromstring(xml_data)
+
     items = []
 
-    for item in root.findall(".//item")[:5]:
-        title = item.findtext("title", "").strip()
+    for item in root.findall(".//item")[:4]:
+
+        original_title = item.findtext("title", "").strip()
         link = item.findtext("link", "").strip()
         pub_date = item.findtext("pubDate", "").strip()
 
         source_element = item.find("source")
+
         source_name = (
             source_element.text.strip()
             if source_element is not None and source_element.text
             else "News"
         )
 
-        if not title or not link:
+        if not original_title or not link:
             continue
+
+        arabic_title, arabic_summary = improve_with_ai(
+            original_title,
+            source_name
+        )
 
         items.append({
             "id": str(abs(hash(link))),
-            "title": title,
-            "summary": "اضغط فتح المصدر لقراءة تفاصيل الخبر كاملة.",
+            "title": arabic_title,
+            "summary": arabic_summary,
             "category": source["category"],
             "category_ar": source["category_ar"],
             "source": source_name,
@@ -86,9 +161,9 @@ for source in SOURCES:
     try:
         all_news.extend(read_feed(source))
     except Exception as error:
-        print("Source failed:", error)
+        print("Feed error:", error)
 
-all_news = all_news[:25]
+all_news = all_news[:20]
 
 with open("news.json", "w", encoding="utf-8") as file:
     json.dump(
