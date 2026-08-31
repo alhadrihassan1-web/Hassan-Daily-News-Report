@@ -1,10 +1,12 @@
 import json
-import os
 import urllib.request
 import xml.etree.ElementTree as ET
+import re
+from html import unescape
 from datetime import datetime
 
-OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY")
+import argostranslate.package
+import argostranslate.translate
 
 SOURCES = [
     {
@@ -39,70 +41,37 @@ SOURCES = [
     }
 ]
 
-def improve_with_ai(title, source_name):
-    if not OPENAI_API_KEY:
-        return title, "اضغط فتح المصدر لقراءة تفاصيل الخبر."
+def setup_translation():
+    argostranslate.package.update_package_index()
+    packages = argostranslate.package.get_available_packages()
 
-    prompt = f"""
-حوّل الخبر التالي إلى صيغة عربية مناسبة لموقع أخبار شخصي.
-
-العنوان الأصلي:
-{title}
-
-المصدر:
-{source_name}
-
-أرجع JSON فقط بهذا الشكل:
-{{
-  "title": "عنوان عربي واضح ومختصر",
-  "summary": "ملخص عربي من سطر إلى سطرين فقط"
-}}
-
-لا تضف معلومات غير موجودة في العنوان.
-"""
-
-    payload = {
-        "model": "gpt-5.6-luna",
-        "input": prompt
-    }
-
-    request = urllib.request.Request(
-        "https://api.openai.com/v1/responses",
-        data=json.dumps(payload).encode("utf-8"),
-        headers={
-            "Authorization": f"Bearer {OPENAI_API_KEY}",
-            "Content-Type": "application/json"
-        },
-        method="POST"
+    package = next(
+        p for p in packages
+        if p.from_code == "en" and p.to_code == "ar"
     )
 
+    argostranslate.package.install_from_path(
+        package.download()
+    )
+
+def translate(text):
+    if not text:
+        return ""
+
     try:
-        with urllib.request.urlopen(request, timeout=40) as response:
-            result = json.loads(response.read().decode("utf-8"))
-
-        text = ""
-
-        for output in result.get("output", []):
-            for content in output.get("content", []):
-                if content.get("type") == "output_text":
-                    text += content.get("text", "")
-
-        text = text.strip()
-
-        if text.startswith("```"):
-            text = text.replace("```json", "").replace("```", "").strip()
-
-        ai_data = json.loads(text)
-
-        return (
-            ai_data.get("title", title),
-            ai_data.get("summary", "اضغط فتح المصدر لقراءة التفاصيل.")
+        return argostranslate.translate.translate(
+            text,
+            "en",
+            "ar"
         )
+    except:
+        return text
 
-    except Exception as error:
-        print("AI error:", error)
-        return title, "اضغط فتح المصدر لقراءة تفاصيل الخبر."
-
+def clean_html(text):
+    text = unescape(text or "")
+    text = re.sub(r"<[^>]+>", " ", text)
+    text = re.sub(r"\s+", " ", text)
+    return text.strip()
 
 def read_feed(source):
     request = urllib.request.Request(
@@ -110,34 +79,58 @@ def read_feed(source):
         headers={"User-Agent": "Mozilla/5.0"}
     )
 
-    with urllib.request.urlopen(request, timeout=20) as response:
+    with urllib.request.urlopen(
+        request,
+        timeout=30
+    ) as response:
         xml_data = response.read()
 
     root = ET.fromstring(xml_data)
-
     items = []
 
     for item in root.findall(".//item")[:4]:
 
-        original_title = item.findtext("title", "").strip()
-        link = item.findtext("link", "").strip()
-        pub_date = item.findtext("pubDate", "").strip()
+        original_title = item.findtext(
+            "title",
+            ""
+        ).strip()
+
+        description = clean_html(
+            item.findtext("description", "")
+        )
+
+        link = item.findtext(
+            "link",
+            ""
+        ).strip()
+
+        pub_date = item.findtext(
+            "pubDate",
+            ""
+        ).strip()
 
         source_element = item.find("source")
 
         source_name = (
             source_element.text.strip()
-            if source_element is not None and source_element.text
+            if source_element is not None
+            and source_element.text
             else "News"
         )
 
         if not original_title or not link:
             continue
 
-        arabic_title, arabic_summary = improve_with_ai(
-            original_title,
-            source_name
-        )
+        arabic_title = translate(original_title)
+
+        if description:
+            arabic_summary = translate(
+                description[:350]
+            )
+        else:
+            arabic_summary = (
+                "اضغط فتح المصدر لقراءة التفاصيل."
+            )
 
         items.append({
             "id": str(abs(hash(link))),
@@ -154,18 +147,30 @@ def read_feed(source):
 
     return items
 
+print("Installing Arabic translation model...")
+setup_translation()
 
 all_news = []
 
 for source in SOURCES:
     try:
-        all_news.extend(read_feed(source))
+        all_news.extend(
+            read_feed(source)
+        )
     except Exception as error:
-        print("Feed error:", error)
+        print(
+            "Feed failed:",
+            error
+        )
 
 all_news = all_news[:20]
 
-with open("news.json", "w", encoding="utf-8") as file:
+with open(
+    "news.json",
+    "w",
+    encoding="utf-8"
+) as file:
+
     json.dump(
         all_news,
         file,
@@ -173,5 +178,7 @@ with open("news.json", "w", encoding="utf-8") as file:
         indent=2
     )
 
-print(f"Updated {len(all_news)} news items.")
+print(
+    f"Updated {len(all_news)} news items"
+)
 print(datetime.now())
