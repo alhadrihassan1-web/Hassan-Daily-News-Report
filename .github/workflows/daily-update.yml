@@ -21,9 +21,6 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Install free translator
-        run: pip install argostranslate
-
       - name: Update news
         run: python update_site.py
 
