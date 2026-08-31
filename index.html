@@ -17,6 +17,46 @@
       color: #1b1b1b;
     }
 
+    .top-nav {
+      background: #0f172a;
+      color: white;
+      padding: 12px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .top-nav .brand {
+      font-weight: bold;
+      font-size: 18px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 10px;
+    }
+
+    .nav-links a {
+      color: white;
+      text-decoration: none;
+      padding: 8px 14px;
+      border-radius: 8px;
+      background: rgba(255,255,255,0.08);
+    }
+
+    .nav-links a:hover {
+      background: white;
+      color: #111827;
+    }
+
+    .nav-links a.active {
+      background: white;
+      color: #111827;
+      font-weight: bold;
+    }
+
     header {
       background: #111827;
       color: white;
@@ -156,6 +196,15 @@
 
 <body>
 
+<div class="top-nav">
+  <div class="brand">Hassan Daily</div>
+
+  <div class="nav-links">
+    <a href="index.html" class="active">الأخبار</a>
+    <a href="jobs.html">الوظائف</a>
+  </div>
+</div>
+
 <header>
   <h1>Hassan Daily News</h1>
   <p>أهم الأخبار اليومية في مكان واحد</p>
@@ -201,7 +250,6 @@
     </div>
   </article>
 
-
   <article class="news-card" data-category="Gaming" data-id="news2">
     <div class="news-image">🎮</div>
 
@@ -230,7 +278,6 @@
       </div>
     </div>
   </article>
-
 
   <article class="news-card" data-category="Saudi" data-id="news3">
     <div class="news-image">🇸🇦</div>
@@ -263,7 +310,6 @@
 </main>
 
 <script>
-
 function markRead(id) {
   localStorage.setItem(id, "read");
 
@@ -275,23 +321,17 @@ function markRead(id) {
 }
 
 function loadReadNews() {
-
   document.querySelectorAll(".news-card").forEach(card => {
-
     const id = card.dataset.id;
 
     if (localStorage.getItem(id) === "read") {
       card.classList.add("read");
     }
-
   });
-
 }
 
 function filterNews(category) {
-
   document.querySelectorAll(".news-card").forEach(card => {
-
     if (
       category === "all" ||
       card.dataset.category === category
@@ -300,13 +340,10 @@ function filterNews(category) {
     } else {
       card.style.display = "none";
     }
-
   });
-
 }
 
 loadReadNews();
-
 </script>
 
 </body>
