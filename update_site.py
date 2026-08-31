@@ -5,9 +5,6 @@ import re
 from html import unescape
 from datetime import datetime
 
-import argostranslate.package
-import argostranslate.translate
-
 SOURCES = [
     {
         "url": "https://news.google.com/rss/search?q=السعودية&hl=ar&gl=SA&ceid=SA:ar",
@@ -41,32 +38,6 @@ SOURCES = [
     }
 ]
 
-def setup_translation():
-    argostranslate.package.update_package_index()
-    packages = argostranslate.package.get_available_packages()
-
-    package = next(
-        p for p in packages
-        if p.from_code == "en" and p.to_code == "ar"
-    )
-
-    argostranslate.package.install_from_path(
-        package.download()
-    )
-
-def translate(text):
-    if not text:
-        return ""
-
-    try:
-        return argostranslate.translate.translate(
-            text,
-            "en",
-            "ar"
-        )
-    except:
-        return text
-
 def clean_html(text):
     text = unescape(text or "")
     text = re.sub(r"<[^>]+>", " ", text)
@@ -79,63 +50,33 @@ def read_feed(source):
         headers={"User-Agent": "Mozilla/5.0"}
     )
 
-    with urllib.request.urlopen(
-        request,
-        timeout=30
-    ) as response:
+    with urllib.request.urlopen(request, timeout=30) as response:
         xml_data = response.read()
 
     root = ET.fromstring(xml_data)
     items = []
 
-    for item in root.findall(".//item")[:4]:
-
-        original_title = item.findtext(
-            "title",
-            ""
-        ).strip()
-
-        description = clean_html(
-            item.findtext("description", "")
-        )
-
-        link = item.findtext(
-            "link",
-            ""
-        ).strip()
-
-        pub_date = item.findtext(
-            "pubDate",
-            ""
-        ).strip()
+    for item in root.findall(".//item")[:5]:
+        title = item.findtext("title", "").strip()
+        description = clean_html(item.findtext("description", ""))
+        link = item.findtext("link", "").strip()
+        pub_date = item.findtext("pubDate", "").strip()
 
         source_element = item.find("source")
 
         source_name = (
             source_element.text.strip()
-            if source_element is not None
-            and source_element.text
+            if source_element is not None and source_element.text
             else "News"
         )
 
-        if not original_title or not link:
+        if not title or not link:
             continue
-
-        arabic_title = translate(original_title)
-
-        if description:
-            arabic_summary = translate(
-                description[:350]
-            )
-        else:
-            arabic_summary = (
-                "اضغط فتح المصدر لقراءة التفاصيل."
-            )
 
         items.append({
             "id": str(abs(hash(link))),
-            "title": arabic_title,
-            "summary": arabic_summary,
+            "title": title,
+            "summary": description if description else "اضغط فتح المصدر لقراءة التفاصيل.",
             "category": source["category"],
             "category_ar": source["category_ar"],
             "source": source_name,
@@ -147,30 +88,17 @@ def read_feed(source):
 
     return items
 
-print("Installing Arabic translation model...")
-setup_translation()
-
 all_news = []
 
 for source in SOURCES:
     try:
-        all_news.extend(
-            read_feed(source)
-        )
+        all_news.extend(read_feed(source))
     except Exception as error:
-        print(
-            "Feed failed:",
-            error
-        )
+        print("Feed failed:", error)
 
-all_news = all_news[:20]
+all_news = all_news[:25]
 
-with open(
-    "news.json",
-    "w",
-    encoding="utf-8"
-) as file:
-
+with open("news.json", "w", encoding="utf-8") as file:
     json.dump(
         all_news,
         file,
@@ -178,7 +106,5 @@ with open(
         indent=2
     )
 
-print(
-    f"Updated {len(all_news)} news items"
-)
+print(f"Updated {len(all_news)} news items.")
 print(datetime.now())
