@@ -1,0 +1,28 @@
+[
+  {
+    "id": "job-001",
+    "title": "Administrative Coordinator",
+    "company": "شركة تجريبية",
+    "city": "Jazan",
+    "city_ar": "جازان",
+    "type": "دوام كامل",
+    "category": "إداري",
+    "status": "متاحة",
+    "date": "31 أغسطس 2026",
+    "summary": "وظيفة تجريبية فقط. لاحقًا سنضع الوظائف الحقيقية المناسبة مع رابط التقديم الرسمي.",
+    "url": "#"
+  },
+  {
+    "id": "job-002",
+    "title": "Operations Coordinator",
+    "company": "شركة عالمية تجريبية",
+    "city": "Riyadh",
+    "city_ar": "الرياض",
+    "type": "دوام كامل",
+    "category": "Operations",
+    "status": "متاحة",
+    "date": "31 أغسطس 2026",
+    "summary": "هنا ستظهر الوظائف المناسبة من الشركات الكبيرة وروابط التقديم المباشر.",
+    "url": "#"
+  }
+]
