@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hassan Daily News</title>
+  <title>Hassan Daily</title>
 
   <style>
     * {
@@ -13,14 +13,14 @@
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background: #f5f6f8;
-      color: #1b1b1b;
+      background: #f3f4f6;
+      color: #111827;
     }
 
-    .top-nav {
+    .topbar {
       background: #0f172a;
       color: white;
-      padding: 12px 20px;
+      padding: 14px 22px;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -28,87 +28,89 @@
       flex-wrap: wrap;
     }
 
-    .top-nav .brand {
+    .brand {
+      font-size: 20px;
       font-weight: bold;
-      font-size: 18px;
     }
 
-    .nav-links {
+    .nav {
       display: flex;
       gap: 10px;
     }
 
-    .nav-links a {
+    .nav a {
       color: white;
       text-decoration: none;
-      padding: 8px 14px;
-      border-radius: 8px;
+      padding: 9px 15px;
+      border-radius: 9px;
       background: rgba(255,255,255,0.08);
     }
 
-    .nav-links a:hover {
-      background: white;
-      color: #111827;
-    }
-
-    .nav-links a.active {
+    .nav a.active {
       background: white;
       color: #111827;
       font-weight: bold;
     }
 
-    header {
+    .hero {
       background: #111827;
       color: white;
-      padding: 28px 20px;
+      padding: 35px 22px;
     }
 
-    header h1 {
+    .hero-inner {
+      max-width: 1100px;
+      margin: auto;
+    }
+
+    .hero h1 {
       margin: 0 0 8px;
+      font-size: 34px;
     }
 
-    header p {
+    .hero p {
       margin: 0;
       color: #cbd5e1;
     }
 
-    .filters {
-      max-width: 950px;
-      margin: 20px auto;
+    .controls {
+      max-width: 1100px;
+      margin: 22px auto 15px;
       padding: 0 15px;
       display: flex;
-      gap: 8px;
+      gap: 10px;
       flex-wrap: wrap;
+      align-items: center;
     }
 
-    .filters button {
-      border: none;
+    .controls button {
+      border: 1px solid #d1d5db;
       background: white;
       padding: 10px 15px;
       border-radius: 20px;
       cursor: pointer;
-      border: 1px solid #ddd;
     }
 
-    .filters button:hover {
+    .controls button:hover,
+    .controls button.active {
       background: #111827;
       color: white;
     }
 
     main {
-      max-width: 950px;
+      max-width: 1100px;
       margin: auto;
-      padding: 0 15px 40px;
+      padding: 0 15px 45px;
     }
 
     .news-card {
       background: white;
-      border-radius: 14px;
-      margin-bottom: 15px;
+      display: grid;
+      grid-template-columns: 290px 1fr;
+      margin-bottom: 18px;
+      border-radius: 16px;
       overflow: hidden;
-      display: flex;
-      min-height: 180px;
-      box-shadow: 0 2px 8px rgba(0,0,0,.06);
+      box-shadow: 0 3px 12px rgba(0,0,0,.06);
       transition: 0.2s;
     }
 
@@ -117,78 +119,107 @@
     }
 
     .news-card.read {
-      opacity: 0.48;
-      background: #eeeeee;
+      opacity: 0.5;
+      background: #eceff3;
     }
 
     .news-image {
-      width: 260px;
-      background: #d8dde5;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 48px;
+      min-height: 210px;
+      background-size: cover;
+      background-position: center;
+      background-color: #d1d5db;
     }
 
     .news-content {
-      padding: 18px;
-      flex: 1;
+      padding: 22px;
     }
 
     .meta {
       display: flex;
-      gap: 8px;
       flex-wrap: wrap;
-      margin-bottom: 10px;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .badge {
+      padding: 6px 10px;
+      border-radius: 8px;
       font-size: 13px;
     }
 
     .category {
       background: #111827;
       color: white;
-      padding: 5px 9px;
-      border-radius: 8px;
     }
 
     .source {
       background: #e5e7eb;
-      padding: 5px 9px;
-      border-radius: 8px;
+      color: #111827;
+    }
+
+    .breaking {
+      background: #fee2e2;
+      color: #991b1b;
+      font-weight: bold;
     }
 
     .news-content h2 {
-      margin: 0 0 10px;
-      font-size: 21px;
+      margin: 0 0 12px;
+      font-size: 24px;
+      line-height: 1.4;
     }
 
     .news-content p {
-      color: #555;
-      line-height: 1.6;
+      color: #4b5563;
+      line-height: 1.8;
+      margin-bottom: 18px;
     }
 
     .bottom {
       display: flex;
       justify-content: space-between;
+      gap: 15px;
       align-items: center;
-      margin-top: 15px;
+      flex-wrap: wrap;
       font-size: 13px;
-      color: #777;
+      color: #6b7280;
     }
 
     .read-link {
-      color: #2563eb;
+      background: #111827;
+      color: white;
       text-decoration: none;
+      padding: 9px 14px;
+      border-radius: 8px;
       font-weight: bold;
     }
 
-    @media (max-width: 650px) {
+    .read-link:hover {
+      background: #374151;
+    }
+
+    .read-label {
+      display: none;
+      color: #166534;
+      font-weight: bold;
+      margin-right: 8px;
+    }
+
+    .news-card.read .read-label {
+      display: inline;
+    }
+
+    @media (max-width: 750px) {
       .news-card {
-        display: block;
+        grid-template-columns: 1fr;
       }
 
       .news-image {
-        width: 100%;
-        height: 160px;
+        height: 210px;
+      }
+
+      .hero h1 {
+        font-size: 28px;
       }
     }
   </style>
@@ -196,112 +227,139 @@
 
 <body>
 
-<div class="top-nav">
+<div class="topbar">
   <div class="brand">Hassan Daily</div>
 
-  <div class="nav-links">
+  <div class="nav">
     <a href="index.html" class="active">الأخبار</a>
     <a href="jobs.html">الوظائف</a>
   </div>
 </div>
 
-<header>
-  <h1>Hassan Daily News</h1>
-  <p>أهم الأخبار اليومية في مكان واحد</p>
-</header>
+<section class="hero">
+  <div class="hero-inner">
+    <h1>الأخبار اليومية</h1>
+    <p>أهم الأخبار المختارة والمحدثة في مكان واحد</p>
+  </div>
+</section>
 
-<div class="filters">
-  <button onclick="filterNews('all')">الكل</button>
-  <button onclick="filterNews('Saudi')">السعودية</button>
-  <button onclick="filterNews('World')">العالم</button>
-  <button onclick="filterNews('Gaming')">ألعاب</button>
-  <button onclick="filterNews('Sports')">رياضة</button>
-  <button onclick="filterNews('Tech')">تقنية</button>
+<div class="controls">
+  <button class="active" onclick="filterNews('all', this)">الكل</button>
+  <button onclick="filterNews('Saudi', this)">السعودية</button>
+  <button onclick="filterNews('World', this)">العالم</button>
+  <button onclick="filterNews('Gaming', this)">ألعاب</button>
+  <button onclick="filterNews('Sports', this)">رياضة</button>
+  <button onclick="filterNews('Tech', this)">تقنية</button>
+  <button onclick="showUnread(this)">غير المقروء فقط</button>
 </div>
 
 <main>
 
   <article class="news-card" data-category="World" data-id="news1">
-    <div class="news-image">🌍</div>
+    <div
+      class="news-image"
+      style="background-image:url('https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?auto=format&fit=crop&w=900&q=80');">
+    </div>
 
     <div class="news-content">
       <div class="meta">
-        <span class="category">العالم</span>
-        <span class="source">Reuters</span>
+        <span class="badge category">العالم</span>
+        <span class="badge source">Reuters</span>
+        <span class="badge breaking">عاجل</span>
       </div>
 
       <h2>خبر تجريبي عالمي</h2>
 
       <p>
-        هنا سيكون ملخص الخبر بشكل قصير وواضح.
-        لاحقاً سنضع الأخبار الحقيقية والتحديثات اليومية.
+        هذا مكان ملخص الخبر. لاحقًا سنضع هنا الأخبار الحقيقية اليومية
+        مع المصدر والرابط والتاريخ والتصنيف.
       </p>
 
       <div class="bottom">
-        <span>31 أغسطس 2026 • 9:30 PM</span>
+        <div>
+          31 أغسطس 2026 • 9:30 PM
+          <span class="read-label">✓ مقروء</span>
+        </div>
 
-        <a class="read-link"
-           href="https://www.reuters.com/world/"
-           target="_blank"
-           onclick="markRead('news1')">
-          اقرأ الخبر ↗
+        <a
+          class="read-link"
+          href="https://www.reuters.com/world/"
+          target="_blank"
+          onclick="markRead('news1')">
+          فتح المصدر
         </a>
       </div>
     </div>
   </article>
 
+
   <article class="news-card" data-category="Gaming" data-id="news2">
-    <div class="news-image">🎮</div>
+    <div
+      class="news-image"
+      style="background-image:url('https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=900&q=80');">
+    </div>
 
     <div class="news-content">
       <div class="meta">
-        <span class="category">ألعاب</span>
-        <span class="source">EA</span>
+        <span class="badge category">ألعاب</span>
+        <span class="badge source">EA</span>
       </div>
 
       <h2>خبر تجريبي عن الألعاب</h2>
 
       <p>
-        هنا تظهر أخبار Battlefield وCall of Duty
-        والألعاب التي تتابعها.
+        هنا ستظهر أخبار Battlefield وCall of Duty
+        وأهم تحديثات الألعاب التي تهمك.
       </p>
 
       <div class="bottom">
-        <span>31 أغسطس 2026 • 8:45 PM</span>
+        <div>
+          31 أغسطس 2026 • 8:45 PM
+          <span class="read-label">✓ مقروء</span>
+        </div>
 
-        <a class="read-link"
-           href="https://www.ea.com/"
-           target="_blank"
-           onclick="markRead('news2')">
-          اقرأ الخبر ↗
+        <a
+          class="read-link"
+          href="https://www.ea.com/"
+          target="_blank"
+          onclick="markRead('news2')">
+          فتح المصدر
         </a>
       </div>
     </div>
   </article>
 
+
   <article class="news-card" data-category="Saudi" data-id="news3">
-    <div class="news-image">🇸🇦</div>
+    <div
+      class="news-image"
+      style="background-image:url('https://images.unsplash.com/photo-1539650116574-75c0c6d73f6e?auto=format&fit=crop&w=900&q=80');">
+    </div>
 
     <div class="news-content">
       <div class="meta">
-        <span class="category">السعودية</span>
-        <span class="source">مصدر الخبر</span>
+        <span class="badge category">السعودية</span>
+        <span class="badge source">مصدر محلي</span>
       </div>
 
       <h2>خبر تجريبي محلي</h2>
 
       <p>
-        هنا سنضع أخبار السعودية وجازان وعسير
-        والأخبار المحلية المهمة.
+        هنا ستظهر أخبار السعودية وجازان وعسير
+        والأحداث المحلية المهمة.
       </p>
 
       <div class="bottom">
-        <span>31 أغسطس 2026 • 7:50 PM</span>
+        <div>
+          31 أغسطس 2026 • 7:50 PM
+          <span class="read-label">✓ مقروء</span>
+        </div>
 
-        <a class="read-link"
-           href="#"
-           onclick="markRead('news3')">
-          اقرأ الخبر
+        <a
+          class="read-link"
+          href="#"
+          onclick="markRead('news3')">
+          فتح المصدر
         </a>
       </div>
     </div>
@@ -310,14 +368,17 @@
 </main>
 
 <script>
+let currentCategory = "all";
+let unreadOnly = false;
+
 function markRead(id) {
   localStorage.setItem(id, "read");
 
-  const card = document.querySelector(
-    '[data-id="' + id + '"]'
-  );
+  const card = document.querySelector('[data-id="' + id + '"]');
 
-  card.classList.add("read");
+  if (card) {
+    card.classList.add("read");
+  }
 }
 
 function loadReadNews() {
@@ -330,12 +391,36 @@ function loadReadNews() {
   });
 }
 
-function filterNews(category) {
+function filterNews(category, button) {
+  currentCategory = category;
+
+  document.querySelectorAll(".controls button").forEach(btn => {
+    if (btn.textContent !== "غير المقروء فقط") {
+      btn.classList.remove("active");
+    }
+  });
+
+  button.classList.add("active");
+  applyFilters();
+}
+
+function showUnread(button) {
+  unreadOnly = !unreadOnly;
+  button.classList.toggle("active");
+  applyFilters();
+}
+
+function applyFilters() {
   document.querySelectorAll(".news-card").forEach(card => {
-    if (
-      category === "all" ||
-      card.dataset.category === category
-    ) {
+    const matchesCategory =
+      currentCategory === "all" ||
+      card.dataset.category === currentCategory;
+
+    const matchesUnread =
+      !unreadOnly ||
+      !card.classList.contains("read");
+
+    if (matchesCategory && matchesUnread) {
       card.style.display = "";
     } else {
       card.style.display = "none";
