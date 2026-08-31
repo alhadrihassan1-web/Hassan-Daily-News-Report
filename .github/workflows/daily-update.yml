@@ -21,6 +21,9 @@ jobs:
         with:
           python-version: "3.12"
 
+      - name: Install free translator
+        run: pip install deep-translator
+
       - name: Update news
         run: python update_site.py
 
