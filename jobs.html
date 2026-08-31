@@ -22,7 +22,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      gap: 15px;
+      gap: 12px;
       flex-wrap: wrap;
     }
 
@@ -41,7 +41,7 @@
       text-decoration: none;
       padding: 9px 15px;
       border-radius: 9px;
-      background: rgba(255,255,255,0.08);
+      background: rgba(255,255,255,.08);
     }
 
     .nav a.active {
@@ -63,7 +63,6 @@
 
     .hero h1 {
       margin: 0 0 8px;
-      font-size: 34px;
     }
 
     .hero p {
@@ -88,8 +87,7 @@
       cursor: pointer;
     }
 
-    .controls button.active,
-    .controls button:hover {
+    .controls button.active {
       background: #111827;
       color: white;
     }
@@ -109,7 +107,7 @@
     }
 
     .job-card.opened {
-      opacity: 0.55;
+      opacity: .55;
       background: #eceff3;
     }
 
@@ -165,8 +163,8 @@
       gap: 12px;
       flex-wrap: wrap;
       margin-top: 18px;
-      font-size: 13px;
       color: #6b7280;
+      font-size: 13px;
     }
 
     .apply-link {
@@ -176,10 +174,6 @@
       padding: 9px 14px;
       border-radius: 8px;
       font-weight: bold;
-    }
-
-    @media (max-width: 700px) {
-      .hero h1 { font-size: 28px; }
     }
   </style>
 </head>
@@ -210,107 +204,89 @@
   <button onclick="filterJobs('Jeddah', this)">جدة</button>
 </div>
 
-<main>
-
-  <article class="job-card" data-city="Jazan" data-id="job1">
-    <div class="job-top">
-      <div>
-        <h2>Administrative Coordinator</h2>
-        <div class="company">شركة تجريبية</div>
-      </div>
-      <span class="status">متاحة</span>
-    </div>
-
-    <div class="tags">
-      <span class="tag">📍 جازان</span>
-      <span class="tag">إداري</span>
-      <span class="tag">دوام كامل</span>
-    </div>
-
-    <p>
-      وظيفة تجريبية فقط. لاحقًا سنضع هنا الوظائف الحقيقية
-      مع رابط التقديم الرسمي وتاريخ النشر.
-    </p>
-
-    <div class="bottom">
-      <span>31 أغسطس 2026</span>
-
-      <a class="apply-link"
-         href="#"
-         target="_blank"
-         onclick="markOpened('job1')">
-         التقديم
-      </a>
-    </div>
-  </article>
-
-  <article class="job-card" data-city="Riyadh" data-id="job2">
-    <div class="job-top">
-      <div>
-        <h2>Operations Coordinator</h2>
-        <div class="company">شركة عالمية تجريبية</div>
-      </div>
-      <span class="status">متاحة</span>
-    </div>
-
-    <div class="tags">
-      <span class="tag">📍 الرياض</span>
-      <span class="tag">Operations</span>
-      <span class="tag">دوام كامل</span>
-    </div>
-
-    <p>
-      هنا ستظهر الوظائف المناسبة من الشركات الكبيرة
-      وروابط التقديم المباشر.
-    </p>
-
-    <div class="bottom">
-      <span>31 أغسطس 2026</span>
-
-      <a class="apply-link"
-         href="#"
-         target="_blank"
-         onclick="markOpened('job2')">
-         التقديم
-      </a>
-    </div>
-  </article>
-
+<main id="jobs-container">
+  جاري تحميل الوظائف...
 </main>
 
 <script>
-function markOpened(id) {
-  localStorage.setItem(id, "opened");
-  const card = document.querySelector('[data-id="' + id + '"]');
-  if (card) card.classList.add("opened");
+let allJobs = [];
+let currentCity = "all";
+
+fetch("jobs.json")
+  .then(response => response.json())
+  .then(data => {
+    allJobs = data;
+    renderJobs();
+  })
+  .catch(error => {
+    document.getElementById("jobs-container").innerHTML =
+      "<p>تعذر تحميل الوظائف.</p>";
+  });
+
+function renderJobs() {
+  const container = document.getElementById("jobs-container");
+
+  const filtered = allJobs.filter(job =>
+    currentCity === "all" || job.city === currentCity
+  );
+
+  if (filtered.length === 0) {
+    container.innerHTML = "<p>لا توجد وظائف في هذا التصنيف.</p>";
+    return;
+  }
+
+  container.innerHTML = filtered.map(job => {
+    const opened =
+      localStorage.getItem(job.id) === "opened";
+
+    return `
+      <article class="job-card ${opened ? "opened" : ""}">
+        <div class="job-top">
+          <div>
+            <h2>${job.title}</h2>
+            <div class="company">${job.company}</div>
+          </div>
+
+          <span class="status">${job.status}</span>
+        </div>
+
+        <div class="tags">
+          <span class="tag">📍 ${job.city_ar}</span>
+          <span class="tag">${job.category}</span>
+          <span class="tag">${job.type}</span>
+        </div>
+
+        <p>${job.summary}</p>
+
+        <div class="bottom">
+          <span>نُشرت: ${job.date}</span>
+
+          <a
+            class="apply-link"
+            href="${job.url}"
+            target="_blank"
+            onclick="markOpened('${job.id}')">
+            التقديم
+          </a>
+        </div>
+      </article>
+    `;
+  }).join("");
 }
 
-function loadOpenedJobs() {
-  document.querySelectorAll(".job-card").forEach(card => {
-    const id = card.dataset.id;
-    if (localStorage.getItem(id) === "opened") {
-      card.classList.add("opened");
-    }
-  });
+function markOpened(id) {
+  localStorage.setItem(id, "opened");
 }
 
 function filterJobs(city, button) {
-  document.querySelectorAll(".controls button").forEach(btn => {
-    btn.classList.remove("active");
-  });
+  currentCity = city;
+
+  document.querySelectorAll(".controls button")
+    .forEach(btn => btn.classList.remove("active"));
 
   button.classList.add("active");
-
-  document.querySelectorAll(".job-card").forEach(card => {
-    if (city === "all" || card.dataset.city === city) {
-      card.style.display = "";
-    } else {
-      card.style.display = "none";
-    }
-  });
+  renderJobs();
 }
-
-loadOpenedJobs();
 </script>
 
 </body>
