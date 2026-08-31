@@ -6,21 +6,19 @@
   <title>Hassan Daily Jobs</title>
 
   <style>
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background: #f5f6f8;
-      color: #1b1b1b;
+      background: #f3f4f6;
+      color: #111827;
     }
 
-    .top-nav {
+    .topbar {
       background: #0f172a;
       color: white;
-      padding: 12px 20px;
+      padding: 14px 22px;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -29,78 +27,90 @@
     }
 
     .brand {
+      font-size: 20px;
       font-weight: bold;
-      font-size: 18px;
     }
 
-    .nav-links {
+    .nav {
       display: flex;
       gap: 10px;
     }
 
-    .nav-links a {
+    .nav a {
       color: white;
       text-decoration: none;
-      padding: 8px 14px;
-      border-radius: 8px;
+      padding: 9px 15px;
+      border-radius: 9px;
       background: rgba(255,255,255,0.08);
     }
 
-    .nav-links a.active {
+    .nav a.active {
       background: white;
       color: #111827;
       font-weight: bold;
     }
 
-    header {
+    .hero {
       background: #111827;
       color: white;
-      padding: 30px 20px;
+      padding: 35px 22px;
     }
 
-    header h1 {
+    .hero-inner {
+      max-width: 1100px;
+      margin: auto;
+    }
+
+    .hero h1 {
       margin: 0 0 8px;
+      font-size: 34px;
     }
 
-    header p {
+    .hero p {
       margin: 0;
       color: #cbd5e1;
     }
 
-    .filters {
-      max-width: 950px;
-      margin: 20px auto;
+    .controls {
+      max-width: 1100px;
+      margin: 22px auto 15px;
       padding: 0 15px;
       display: flex;
-      gap: 8px;
+      gap: 10px;
       flex-wrap: wrap;
     }
 
-    .filters button {
+    .controls button {
+      border: 1px solid #d1d5db;
       background: white;
-      border: 1px solid #ddd;
       padding: 10px 15px;
       border-radius: 20px;
       cursor: pointer;
     }
 
-    .filters button:hover {
+    .controls button.active,
+    .controls button:hover {
       background: #111827;
       color: white;
     }
 
     main {
-      max-width: 950px;
+      max-width: 1100px;
       margin: auto;
-      padding: 0 15px 40px;
+      padding: 0 15px 45px;
     }
 
     .job-card {
       background: white;
-      border-radius: 14px;
-      padding: 20px;
-      margin-bottom: 15px;
-      box-shadow: 0 2px 8px rgba(0,0,0,.06);
+      border-radius: 16px;
+      padding: 22px;
+      margin-bottom: 16px;
+      box-shadow: 0 3px 12px rgba(0,0,0,.06);
+    }
+
+    .job-card.opened {
+      opacity: 0.55;
+      background: #eceff3;
     }
 
     .job-top {
@@ -111,20 +121,20 @@
     }
 
     .job-card h2 {
-      margin: 0 0 10px;
-      font-size: 21px;
+      margin: 0 0 8px;
+      font-size: 24px;
     }
 
     .company {
       font-weight: bold;
-      color: #444;
+      color: #374151;
     }
 
-    .details {
+    .tags {
       display: flex;
       gap: 8px;
       flex-wrap: wrap;
-      margin: 14px 0;
+      margin: 15px 0;
     }
 
     .tag {
@@ -139,126 +149,129 @@
       color: #166534;
       padding: 6px 10px;
       border-radius: 8px;
-      font-size: 13px;
       font-weight: bold;
+      font-size: 13px;
     }
 
     .job-card p {
-      color: #555;
-      line-height: 1.6;
+      color: #4b5563;
+      line-height: 1.8;
     }
 
     .bottom {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      gap: 10px;
+      gap: 12px;
       flex-wrap: wrap;
-      margin-top: 15px;
+      margin-top: 18px;
       font-size: 13px;
-      color: #777;
+      color: #6b7280;
     }
 
     .apply-link {
-      text-decoration: none;
       background: #111827;
       color: white;
+      text-decoration: none;
       padding: 9px 14px;
       border-radius: 8px;
       font-weight: bold;
     }
 
-    @media (max-width: 650px) {
-      .job-top {
-        display: block;
-      }
+    @media (max-width: 700px) {
+      .hero h1 { font-size: 28px; }
     }
   </style>
 </head>
 
 <body>
 
-<div class="top-nav">
+<div class="topbar">
   <div class="brand">Hassan Daily</div>
 
-  <div class="nav-links">
+  <div class="nav">
     <a href="index.html">الأخبار</a>
     <a href="jobs.html" class="active">الوظائف</a>
   </div>
 </div>
 
-<header>
-  <h1>الوظائف</h1>
-  <p>الفرص الوظيفية المناسبة والمحدثة</p>
-</header>
+<section class="hero">
+  <div class="hero-inner">
+    <h1>الوظائف</h1>
+    <p>الفرص المناسبة والمحدثة وروابط التقديم الرسمية</p>
+  </div>
+</section>
 
-<div class="filters">
-  <button onclick="filterJobs('all')">الكل</button>
-  <button onclick="filterJobs('Jazan')">جازان</button>
-  <button onclick="filterJobs('Asir')">عسير</button>
-  <button onclick="filterJobs('Riyadh')">الرياض</button>
-  <button onclick="filterJobs('Jeddah')">جدة</button>
+<div class="controls">
+  <button class="active" onclick="filterJobs('all', this)">الكل</button>
+  <button onclick="filterJobs('Jazan', this)">جازان</button>
+  <button onclick="filterJobs('Asir', this)">عسير</button>
+  <button onclick="filterJobs('Riyadh', this)">الرياض</button>
+  <button onclick="filterJobs('Jeddah', this)">جدة</button>
 </div>
 
 <main>
 
-  <article class="job-card" data-city="Jazan">
+  <article class="job-card" data-city="Jazan" data-id="job1">
     <div class="job-top">
       <div>
         <h2>Administrative Coordinator</h2>
         <div class="company">شركة تجريبية</div>
       </div>
-
       <span class="status">متاحة</span>
     </div>
 
-    <div class="details">
+    <div class="tags">
       <span class="tag">📍 جازان</span>
       <span class="tag">إداري</span>
       <span class="tag">دوام كامل</span>
     </div>
 
     <p>
-      هذه وظيفة تجريبية. لاحقًا سنضع هنا الوظائف الحقيقية المناسبة لك
-      مع رابط التقديم الرسمي.
+      وظيفة تجريبية فقط. لاحقًا سنضع هنا الوظائف الحقيقية
+      مع رابط التقديم الرسمي وتاريخ النشر.
     </p>
 
     <div class="bottom">
-      <span>نُشرت: 31 أغسطس 2026</span>
+      <span>31 أغسطس 2026</span>
 
-      <a class="apply-link" href="#" target="_blank">
-        التقديم
+      <a class="apply-link"
+         href="#"
+         target="_blank"
+         onclick="markOpened('job1')">
+         التقديم
       </a>
     </div>
   </article>
 
-
-  <article class="job-card" data-city="Riyadh">
+  <article class="job-card" data-city="Riyadh" data-id="job2">
     <div class="job-top">
       <div>
         <h2>Operations Coordinator</h2>
         <div class="company">شركة عالمية تجريبية</div>
       </div>
-
       <span class="status">متاحة</span>
     </div>
 
-    <div class="details">
+    <div class="tags">
       <span class="tag">📍 الرياض</span>
       <span class="tag">Operations</span>
       <span class="tag">دوام كامل</span>
     </div>
 
     <p>
-      هنا سنعرض الوظائف المناسبة في الشركات الكبيرة
+      هنا ستظهر الوظائف المناسبة من الشركات الكبيرة
       وروابط التقديم المباشر.
     </p>
 
     <div class="bottom">
-      <span>نُشرت: 31 أغسطس 2026</span>
+      <span>31 أغسطس 2026</span>
 
-      <a class="apply-link" href="#" target="_blank">
-        التقديم
+      <a class="apply-link"
+         href="#"
+         target="_blank"
+         onclick="markOpened('job2')">
+         التقديم
       </a>
     </div>
   </article>
@@ -266,20 +279,38 @@
 </main>
 
 <script>
-function filterJobs(city) {
-  document.querySelectorAll(".job-card").forEach(card => {
+function markOpened(id) {
+  localStorage.setItem(id, "opened");
+  const card = document.querySelector('[data-id="' + id + '"]');
+  if (card) card.classList.add("opened");
+}
 
-    if (
-      city === "all" ||
-      card.dataset.city === city
-    ) {
+function loadOpenedJobs() {
+  document.querySelectorAll(".job-card").forEach(card => {
+    const id = card.dataset.id;
+    if (localStorage.getItem(id) === "opened") {
+      card.classList.add("opened");
+    }
+  });
+}
+
+function filterJobs(city, button) {
+  document.querySelectorAll(".controls button").forEach(btn => {
+    btn.classList.remove("active");
+  });
+
+  button.classList.add("active");
+
+  document.querySelectorAll(".job-card").forEach(card => {
+    if (city === "all" || card.dataset.city === city) {
       card.style.display = "";
     } else {
       card.style.display = "none";
     }
-
   });
 }
+
+loadOpenedJobs();
 </script>
 
 </body>
