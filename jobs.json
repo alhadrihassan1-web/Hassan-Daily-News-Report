@@ -1,28 +1,54 @@
 [
   {
-    "id": "job-001",
-    "title": "Administrative Coordinator",
-    "company": "شركة تجريبية",
-    "city": "Jazan",
-    "city_ar": "جازان",
+    "id": "job-20260831-001",
+    "title": "Project Coordinator",
+    "company": "ACWA Power",
+    "city": "Riyadh",
+    "city_ar": "السعودية",
     "type": "دوام كامل",
-    "category": "إداري",
+    "category": "إداري / تنسيق مشاريع",
     "status": "متاحة",
-    "date": "31 أغسطس 2026",
-    "summary": "وظيفة تجريبية فقط. لاحقًا سنضع الوظائف الحقيقية المناسبة مع رابط التقديم الرسمي.",
-    "url": "#"
+    "date": "5 أغسطس 2026",
+    "summary": "تنسيق الأنشطة الإدارية في الموقع، دعم فريق الإدارة، متابعة المستندات والساعات والمشتريات والتنسيق مع الموردين. وظيفة قريبة جدًا من الأعمال الإدارية والتنسيقية.",
+    "url": "https://careers.acwapower.com/job/Project-Coordinator/857345023/"
   },
   {
-    "id": "job-002",
-    "title": "Operations Coordinator",
-    "company": "شركة عالمية تجريبية",
+    "id": "job-20260831-002",
+    "title": "Industrial Security Coordinator",
+    "company": "ACWA Power",
     "city": "Riyadh",
-    "city_ar": "الرياض",
+    "city_ar": "رابغ / الرياض",
     "type": "دوام كامل",
-    "category": "Operations",
+    "category": "Security Coordination",
     "status": "متاحة",
-    "date": "31 أغسطس 2026",
-    "summary": "هنا ستظهر الوظائف المناسبة من الشركات الكبيرة وروابط التقديم المباشر.",
-    "url": "#"
+    "date": "7 أغسطس 2026",
+    "summary": "تنسيق متطلبات الأمن الصناعي والامتثال والتصاريح والتحقق الأمني والتعامل مع الجهات التنظيمية. هذه قريبة جدًا من خبرة Access Control والأمن الصناعي.",
+    "url": "https://careers.acwapower.com/job/Riyadh-Industrial-Security-Coordinator/1368368823/"
+  },
+  {
+    "id": "job-20260831-003",
+    "title": "Training & Development Advisor",
+    "company": "Saudi Aramco",
+    "city": "Riyadh",
+    "city_ar": "السعودية",
+    "type": "دوام كامل",
+    "category": "Business Administration",
+    "status": "متاحة",
+    "date": "أغسطس 2026",
+    "summary": "أرامكو تطلب بكالوريوس إدارة أعمال أو إدارة عامة وخبرة في تنسيق وتنفيذ برامج التدريب والتعامل مع أصحاب المصلحة.",
+    "url": "https://careers.aramco.com/expat_uk/job/Training-%26-Development-Advisor/857082923/"
+  },
+  {
+    "id": "job-20260831-004",
+    "title": "Local Content Associate Manager",
+    "company": "ACWA Power",
+    "city": "Jeddah",
+    "city_ar": "جدة",
+    "type": "دوام كامل",
+    "category": "Business / Coordination",
+    "status": "متاحة",
+    "date": "3 أغسطس 2026",
+    "summary": "إدارة ومتابعة متطلبات المحتوى المحلي، إعداد التقارير والمؤشرات، تحليل البيانات والتنسيق مع الجهات الداخلية والخارجية.",
+    "url": "https://careers.acwapower.com/job/Local-Content-Associate-Manager/857337223/"
   }
 ]
