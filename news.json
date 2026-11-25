@@ -1,6 +1,6 @@
 [
   {
-    "id": "1269751126384636975",
+    "id": "7974206476069119218",
     "title": "محللون: عدد لاعبي Call of Duty تراجع بأكثر من 40% بعد إطلاق لعبة GTA 6",
     "summary": "محللون: عدد لاعبي Call of Duty تراجع بأكثر من 40% بعد إطلاق لعبة GTA 6 IGN",
     "category": "Gaming",
@@ -12,7 +12,7 @@
     "breaking": false
   },
   {
-    "id": "3161869681283888835",
+    "id": "100232141733852442",
     "title": "10 ألعاب تصويب تتصدّر السوق الأمريكي",
     "summary": "10 ألعاب تصويب تتصدّر السوق الأمريكي صحيفة الرياضية",
     "category": "Gaming",
@@ -24,7 +24,7 @@
     "breaking": false
   },
   {
-    "id": "2704155788978372228",
+    "id": "8425943281333435445",
     "title": "Warzone موسم 1: كل ما تحتاج لمعرفته",
     "summary": "Warzone موسم 1: كل ما تحتاج لمعرفته Call of Duty® | Best-Selling Video Game Franchise",
     "category": "Gaming",
@@ -36,7 +36,19 @@
     "breaking": false
   },
   {
-    "id": "793020478410215255",
+    "id": "7962330460402039305",
+    "title": "GTA 6 تسحب الأضواء من Call of Duty وتتسبب في تراجع لاعبيها بنسبة 42%",
+    "summary": "GTA 6 تسحب الأضواء من Call of Duty وتتسبب في تراجع لاعبيها بنسبة 42% 25H",
+    "category": "Gaming",
+    "category_ar": "ألعاب",
+    "source": "25H",
+    "date": "Tue, 24 Nov 2026 17:11:44 GMT",
+    "image": "https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=900&q=80",
+    "url": "https://news.google.com/rss/articles/CBMiywJBVV95cUxNUFB3ZGtfVE10YVhlWFAtQS12XzdUaldNYlZQT2p3eXVkZ21KSzZYdVgyQlNDbUJGNml5RjZSSTMzU2hsN2VfNUJRWnl2WG5pV2JPb0VtcG1rVlNvU2pVMjlKY1BsVkctakw5NmFzbFB0ajJTeTR3WFphZ1U4V0ZOLWctd01wU1pHRkd2dFlwX0FDZGt3cnV6X2J6Z2NDb1ctdlNGaG9acmtnckMwMnJndVJGRktfYnQzYXJ5aFhhVG9SNlFJUFFUWTkwbTN4NUExOGxiOFpyaFhTOHU1SXhaTWUtMC1Xb0JvemcwYlFZSUY2Tm5iT21Wb0Y2eVN4a0g2WTZkMHlmNEZ2RXhWbGtROUxhY21nT3ZUUGxTYy1JQ3pRd1B6UEw4N2VGeWRuS1gzbkdrRzNrRG1HUWp2T0VYR3BhLURLRjNNbEpj?oc=5",
+    "breaking": false
+  },
+  {
+    "id": "2343241079248812736",
     "title": "الوصول المبكر لحملة Call of Duty: Modern Warfare 4 مع DLSS 4.5",
     "summary": "الوصول المبكر لحملة Call of Duty: Modern Warfare 4 مع DLSS 4.5 Arabhardware",
     "category": "Gaming",
@@ -45,18 +57,6 @@
     "date": "Mon, 16 Nov 2026 13:33:38 GMT",
     "image": "https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=900&q=80",
     "url": "https://news.google.com/rss/articles/CBMiigFBVV95cUxQSnl3bFVwX0NoNnE0alZzQTBnT3pEcEpGSW85anVFbzJEaUdSU0RNdlpEM05Zc05ZZjFiTURIMGhHOTZfQVZSb2FBZEJ4VW5NZU9ndDFneDZuZnoxNWZjRHNWLUZOcjlvRk14SEd4RTFtcWQ5WktVbl9DOXdHUENSM3RoZXpRanA5UGc?oc=5",
-    "breaking": false
-  },
-  {
-    "id": "831589809705429208",
-    "title": "Call of Duty: Warzone | كأس العالم للرياضات الإلكترونية",
-    "summary": "Call of Duty: Warzone | كأس العالم للرياضات الإلكترونية Esports World Cup",
-    "category": "Gaming",
-    "category_ar": "ألعاب",
-    "source": "Esports World Cup",
-    "date": "Tue, 21 Jul 2026 11:12:48 GMT",
-    "image": "https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=900&q=80",
-    "url": "https://news.google.com/rss/articles/CBMibEFVX3lxTE5KMGEwVks0WW1lX2Y5UzdOYkhrcS0wX3RxTmdmUTQxNGRYZVlqMk1YYVV3d3p1ZDktWmtNVEVCQWptb2lBRnA5ZWpaaXFPeGNNdjh5YjcySDNUbkc1UnpRTzlPdFdNaDY1bFNrUg?oc=5",
     "breaking": false
   }
 ]
